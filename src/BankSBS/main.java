@@ -1,6 +1,6 @@
 package BankSBS;
 
-public class InterfaceBank {
+public class main {
     public static void main(String[] args) {
         BankCont joao = new BankCont();
         BankCont maria = new BankCont();
