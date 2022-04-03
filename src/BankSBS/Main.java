@@ -11,11 +11,12 @@ public class Main {
         maria.setNumCont(2222);
 
         joao.abrirConta("cp");
-        joao.depositar(100.00f);
-        maria.abrirConta("cc");
-        maria.depositar(100.00f);
-        joao.transferir(maria,50);
-        maria.transferir(joao,120.50f);
+        maria.abrirConta("cp");
+
+        joao.depositar(2530.75f);
+        maria.depositar(3325.90f);
+        joao.transferir(maria,450.60f);
+        maria.transferir(joao,1553.50f);
 
         joao.estratoCont();
         maria.estratoCont();

@@ -7,17 +7,20 @@ public class BankCont implements apcaobank {
     private boolean status;
     private BankCont bank;
 
-//   Metodo
+    //   Metodo
     public void estratoCont(){
-        System.out.println("Numero da conta : "+this.getNumCont());
-        System.out.println("Dono : "+this.getDono());
-        System.out.println("Tipo : "+this.getTipo());
-        System.out.println("Saldo Disponível : "+this.getSaldo());
-        System.out.println("----------------- Estrato da conta --------------------");
+        if(this.getStatus()){
+            System.out.println("Numero da conta : "+this.getNumCont());
+            System.out.println("Dono : "+this.getDono());
+            System.out.println("Tipo : "+this.getTipo());
+            System.out.println("Saldo Disponível : "+this.getSaldo());
+            System.out.println("----------------- Estrato da conta --------------------");
+        }
+
     }
 
 
-//  Construct
+//  Construtor
     public BankCont() {
         super();
         this.numCont = numCont;
@@ -81,9 +84,9 @@ public class BankCont implements apcaobank {
     public void fecharConta() {
         if(this.getStatus()){
             if(this.getSaldo() > 0){
-                System.out.println("Saldo em conta, não pode ser encerrado");
+                System.out.println("Saldo de R$"+this.getSaldo()+" em conta, não pode ser encerrado");
             }else if(this.getSaldo() < 0){
-                System.out.println("Conta em débito, impossível encerrar");
+                System.out.println("Conta em débito de R$"+this.getSaldo()+", impossível encerrar");
             }else{
                 this.setStatus(false);
                 System.out.println("Conta encerrada!");
@@ -95,7 +98,6 @@ public class BankCont implements apcaobank {
     @Override
     public void depositar(float v) {
         if(this.getStatus()){
-            this.setSaldo(v);
             this.setSaldo(this.getSaldo() + v);
             System.out.println("Deposito de R$"+v+" na conta de "+this.getDono());
         }else{
@@ -115,12 +117,26 @@ public class BankCont implements apcaobank {
 
     @Override
     public void transferir(BankCont bank, float v) {
-        this.setSaldo(this.getSaldo() - v);
-        bank.setSaldo(bank.getSaldo() + v);
+        if(this.getStatus() && this.getSaldo() > 0){
+            this.setSaldo(this.getSaldo() - v);
+            bank.setSaldo(bank.getSaldo() + v);
+            System.out.println("Transferência de R$"+v+" com sucesso");
+        }else{
+            System.out.println("Saldo insulficiente");
+        }
+
     }
 
-    @Override
-    public void emprestimo() {
+   @Override                     // Ainda sem funcionalidade
+     public void emprestimo(String t, float v) {
+     /*   this.setTipo(t);
+        if(this.getStatus()){
+            if(t == "cc" && t == "cp"){
+                this.setSaldo(this.getSaldo() + v);
 
+            }else{
+                System.out.println("Crédito negado !");
+            }
+        }*/
     }
 }
