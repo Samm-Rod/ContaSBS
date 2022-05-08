@@ -6,5 +6,7 @@ public interface apcaobank {
     public abstract void depositar(float v);
     public abstract void sacar(float v);
     public abstract void transferir(BankCont bankCont, float v);
-    public abstract void emprestimo(String t, float v);
+    public abstract void emprestimo(BankCont bank, float salt);
+    public abstract void cobrarValor();
+
 }

@@ -1,4 +1,7 @@
 package BankSBS;
+
+import java.util.Scanner;
+
 public class BankCont implements apcaobank {
     private int numCont;
     private String dono;
@@ -6,6 +9,7 @@ public class BankCont implements apcaobank {
     private float saldo;
     private boolean status;
     private BankCont bank;
+
 
     //   Metodo
     public void estratoCont(){
@@ -72,10 +76,12 @@ public class BankCont implements apcaobank {
     public void abrirConta(String t) {
         this.setTipo(t);
         this.setStatus(true);
-        if(t == "cp"){
+        if(t == "cd"){
             this.setSaldo(50);
+            System.out.println("Conta Débito aberta, saldo dispónivel de R$"+this.getSaldo());
         }else if(t == "cc"){
             this.setSaldo(100);
+            System.out.println("Conta Corrente aberta, saldo dispónivel de R$"+this.getSaldo());
         }
         System.out.println("Conta aberta!");
     }
@@ -124,19 +130,25 @@ public class BankCont implements apcaobank {
         }else{
             System.out.println("Saldo insulficiente");
         }
+    }
+
+
+    @Override
+     public void emprestimo(BankCont bank, float salt) {
+        System.out.println("Informe a sua quantia desejada: ");
+        Scanner vl = new Scanner(System.in);
+        float val = vl.nextFloat();
+        float parcel = val * 30/100;
+        if(bank.getTipo() == "cc" && parcel <= salt){
+            this.setSaldo(this.getSaldo() + val);
+        } else{
+            System.out.println("Emprestimo concedido apenas aos correntistas");
+        }
+    }
+
+    @Override
+    public void cobrarValor() {
 
     }
 
-   @Override                     // Ainda sem funcionalidade
-     public void emprestimo(String t, float v) {
-     /*   this.setTipo(t);
-        if(this.getStatus()){
-            if(t == "cc" && t == "cp"){
-                this.setSaldo(this.getSaldo() + v);
-
-            }else{
-                System.out.println("Crédito negado !");
-            }
-        }*/
-    }
 }
